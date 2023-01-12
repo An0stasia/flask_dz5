@@ -1,0 +1,109 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>{% block title %} Анкета {% endblock %}</h1>
+{% endblock %}
+
+{% block text_main_1 %}
+        <form class="container" action="/process" method="GET">
+            <h1>Эксперимент/Анкета</h1>
+            <h3>О вас</h3>
+            <div class="form-group">
+              <label for="age">Ваш возраст</label>
+              <input class="form-control" type="number" name="age" id="age" required>
+            </div>
+
+            <div class="form-group">
+              <label>Ваш пол</label>
+              <div class="form-check">
+                <input class="form-check-input" type="radio" name="gender" id="male" value="male" required>
+                <label class="form-check-label" for="male">
+                  Мужской
+                </label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="radio" name="gender" id="female" value="female" required>
+                <label class="form-check-label" for="female">
+                  Женский
+                </label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="radio" name="gender" id="female" value="female" required>
+                <label class="form-check-label" for="female">
+                  Мефедронный коллайдер
+                </label>
+              </div>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="gender" id="female" value="female" required>
+                <label class="form-check-label" for="female">
+                  Противотанковая установка
+                </label>
+            </div>
+            </div>
+        {% for question in questions %}
+            <div class="form-group">
+              <label>{{question.question_text}}</label>
+              <div class="form-check">
+                  {% if question.question_text.startswith('Вы') %}
+                <input class="form-check-input" type="radio" name="q{{ question.question_id }}" id="high" value="high" required>
+                <label class="form-check-label" for="high">
+                  да, профессионал
+                </label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="radio" name="q{{ question.question_id }}" id="low" value="low" required>
+                <label class="form-check-label" for="low">
+                  хз, по приколу на ФиКЛе
+                </label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="radio" name="q{{ question.question_id }}" id="none" value="none" required>
+                <label class="form-check-label" for="none">
+                  не занимаюсь
+                </label>
+              </div>
+            </div>
+
+            <h3>Мнения</h3>
+            <p class="fig"><img src="/static/5qvAR4GWr2M.jpeg" width="380" height="300" alt="Фотография"></p>
+            <p>Норм ли звучат эти предложения? Оцените с помощью ползунка, слева — «точно нет», а справа — «очень даже звучат»</p>
+
+              <div class="form-group">
+                {% elif question.question_text.startswith('Я ушел') %}
+                <input class="form-control-range" id="question" max="100" min="0" name="q{{ question.question_id }}" style="color: #191970"
+                       type="range">
+              </div>
+
+              <div class="form-group">
+                {% elif question.question_text.startswith('Он сделает') %}
+                <input type="range" class="form-control-range" id="question" name="q{{ question.question_id }}" min="0" max="100" style="color: #191970">
+              </div>
+
+              <div class="form-group">
+                {% elif question.question_text.startswith('Жестовый') %}
+                <input type="range" class="form-control-range" id="question" name="q{{ question.question_id }}" min="0" max="100" style="color: #191970">
+              </div>
+
+              <div class="form-group">
+                {% elif question.question_text.startswith('Я люблю') %}
+                <input type="range" class="form-control-range" id="question" name="q{{ question.question_id }}" min="0" max="100" style="color: #191970">
+              </div>
+
+              <div class="form-group">
+                {% elif question.question_text.startswith('Я съел') %}
+                <input type="range" class="form-control-range" id="question" name="q{{ question.question_id }}" min="0" max="100" style="color: #191970">
+              </div>
+
+              <div class="form-group">
+                {% elif question.question_text.startswith('Я сделал') %}
+                <input type="range" class="form-control-range" id="question" name="q{{ question.question_id }}" min="0" max="100" style="color: #191970">
+              </div>
+
+                {% endif %}
+
+        {% endfor %}
+            <button type="submit" class="btn btn-primary">Летсго</button>
+
+        </form>
+{% endblock %}
+

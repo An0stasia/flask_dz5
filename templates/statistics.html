@@ -1,0 +1,115 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>{% block title %} Статистика {% endblock %}</h1>
+{% endblock %}
+
+{% block text_main_1 %}
+
+    <table class="table table-borderless">
+        <thead class="table table-striped">
+            <tr>
+                <th scope="col"><h4><u>Общая информация</u></h4></th>
+            </tr>
+         </thead>
+        <tbody>
+            <tr>
+                <th scope="row"><h5>Всего опрос прошли</h5></th>
+                <td class="align-text-bottom"><h4>{{ all_stat['total_count'] }}</h4></td>
+            </tr>
+            <tr>
+                <th scope="row"><h5>Из них женщин</h5></th>
+                <td class="align-text-bottom"><h4>{{ all_stat['female'] }}</h4></td>
+            </tr>
+            <tr>
+                <th scope="row"><h5>Из них мужчин</h5></th>
+                <td class="align-text-bottom"><h4>{{ all_stat['male'] }}</h4></td>
+            </tr>
+
+            <tr>
+                <th scope="row"><h5>Из них лингвистов</h5></th>
+                <td class="align-text-bottom"><h4>{{ all_stat['high'] }}</h4></td>
+            </tr>
+            <tr>
+                <th scope="row"><h5>По приколу здесь</h5></th>
+                <td class="align-text-bottom"><h4>{{ all_stat['low'] }}</h4></td>
+            </tr>
+            <tr>
+                <th scope="row"><h5>Люди со здоровой психикой</h5></th>
+                <td class="align-text-bottom"><h4>{{ all_stat['none'] }}</h4></td>
+            </tr>
+        </tbody>
+    </table>
+
+
+    <table class="table table-borderless">
+        <thead class="table table-striped">
+            <tr>
+                <th scope="col"><h4><u>Возраст</u></h4></th>
+            </tr>
+         </thead>
+        <tbody>
+            <tr>
+                <th scope="row"><h5>Средний возраст</h5></th>
+                <td class="align-text-bottom"><h4>{{ all_stat['age_mean'] }}</h4></td>
+            </tr>
+            <tr>
+                <th scope="row"><h5>Минимальный возраст</h5></th>
+                <td class="align-text-bottom"><h4>{{ all_stat['age_min'] }}</h4></td>
+            </tr>
+            <tr>
+                <th scope="row"><h5>Максимальный возраст</h5></th>
+                <td class="align-text-bottom"><h4>{{ all_stat['age_max'] }}</h4></td>
+            </tr>
+        </tbody>
+    </table>
+
+
+<table class="table table-borderless">
+        <thead class="table table-striped">
+            <tr>
+                <th scope="col"><h4><u>Вопросы</u></h4></th>
+            </tr>
+         </thead>
+        <tbody>
+            <tr>
+            {% for question in questions %}
+                {% if question.question_text.startswith('Я ушел с') %}
+                <th scope="row"><h5>{{question.question_text}}</h5></th>
+                <td class="align-text-bottom"><h4>{{all_stat['q2_mean']}}</h4></td>
+            </tr>
+            <tr>
+                {% elif question.question_text.startswith('Он сделает') %}
+                <th scope="row"><h5>{{question.question_text}}</h5></th>
+                <td class="align-text-bottom"><h4>{{all_stat['q3_mean']}}</h4></td>
+            </tr>
+            <tr>
+                {% elif question.question_text.startswith('Жестовый язык') %}
+                <th scope="row"><h5>{{question.question_text}}</h5></th>
+                <td class="align-text-bottom"><h4>{{all_stat['q4_mean']}}</h4></td>
+            </tr>
+
+            <tr>
+                {% elif question.question_text.startswith('Я люблю') %}
+                <th scope="row"><h5>{{question.question_text}}</h5></th>
+                <td class="align-text-bottom"><h4>{{all_stat['q5_mean']}}</h4></td>
+            </tr>
+
+            <tr>
+                {% elif question.question_text.startswith('Я съел') %}
+                <th scope="row"><h5>{{question.question_text}}</h5></th>
+                <td class="align-text-bottom"><h4>{{all_stat['q6_mean']}}</h4></td>
+            </tr>
+            <tr>
+                {% elif question.question_text.startswith('Я сделал') %}
+                <th scope="row"><h5>{{question.question_text}}</h5></th>
+                <td class="align-text-bottom"><h4>{{all_stat['q7_mean']}}</h4></td>
+            </tr>
+        </tbody>
+    </table>
+                {% endif %}
+
+            {% endfor %}
+
+{% endblock %}
+
